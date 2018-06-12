@@ -13,7 +13,7 @@ servidor.post('/pessoas', (req, res, next) => {
     let pessoa = {name: name}
     if (!name) {
         res.status(422).send('Name é obrigatório!');
-    } if (name.length > 80) {
+    } else if (name.length > 80) {
         res.status(422).send('nome tem mais de 80 caracteres');
     } else {
         let pessoaSalva = bancoDeDados.salvarPessoa(pessoa)
@@ -38,7 +38,7 @@ servidor.put('/pessoas/:id', (req, res, next) => {
     let pessoa = {id: id, name: name}
     if (!name) {
         res.status(422).send('Name é obrigatório');
-    } if (name.length > 80) {
+    } else if (name.length > 80) {
         res.status(422).send('nome tem mais de 80 caracteres');
     } else {
         bancoDeDados.salvarPessoa(pessoa)
@@ -64,17 +64,17 @@ servidor.post('/receitas', (req, res, next) => {
     let receita = {value: value, note: note, date: convertDate, person: person}
     if (note && note.length > 255) {
         res.status(422).send('note tem mais de 255 caracteres');
-    } if (!value) {
+    } else if (!value) {
         res.status(422).send('Value é obrigatório');
-    } if (value < 0) {
+    } else if (value < 0) {
         res.status(422).send('Value deve ser positivo');
-    } if (!person) {
+    } else if (!person) {
         res.status(422).send('Person é obrigatório');
-    } if (!date) {
+    } else if (!date) {
         res.status(422).send('Date é obrigatório');
-    } if (convertDate.toDate().getTime() > today.getTime()) {
+    } else if (convertDate.toDate().getTime() > today.getTime()) {
         res.status(422).send('Date não pode ser uma data futura');
-    } if (!convertDate.isValid()) {
+    } else if (!convertDate.isValid()) {
         res.status(422).send('Date está com formato errado');
     } else {
         receita.value = receita.value.toFixed(2)
@@ -122,17 +122,17 @@ servidor.put('/receitas/:id', (req, res, next) => {
     let receita = {id: id, code: retorno.code, value: value, note: note, date: convertDate,  person: person}
     if (note && note.length > 255) {
         res.status(422).send('note tem mais de 255 caracteres');
-    } if (value < 0) {
+    } else if (value < 0) {
         res.status(422).send('Value deve ser positivo');
-    } if (!value) {
+    } else if (!value) {
         res.status(422).send('Value é obrigatório');
-    } if (!person) {
+    } else if (!person) {
         res.status(422).send('Person é obrigatório');
-    } if (!date) {
+    } else if (!date) {
         res.status(422).send('Date é obrigatório!');
-    } if (convertDate.toDate().getTime() > today.getTime()) {
+    } else if (convertDate.toDate().getTime() > today.getTime()) {
         res.status(422).send('Date não pode ser uma data futura');
-    } if (!convertDate.isValid()) {
+    } else if (!convertDate.isValid()) {
         res.status(422).send('Date está com formato errado');
     } else {
         receita.value = receita.value.toFixed(2)
